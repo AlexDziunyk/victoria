@@ -55,8 +55,10 @@ const addDislike = async(req, res) => {
 }
 
 const getLikesForPost = async(req, res) => {
+  console.log("12")
   const likes = new Likes();
   const {id} = req.params;
+  console.log("12")
   try {
     const getAllLikesForPost = await likes.getAllPostLikesById(id);
     const getAllPostDislikesById = await likes.getAllPostDislikesById(id);

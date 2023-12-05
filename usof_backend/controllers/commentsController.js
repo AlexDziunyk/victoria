@@ -14,6 +14,18 @@ const getComments = async(req, res) => {
   }
 }
 
+const getReplies = async(req, res) => {
+  const comment = new Comment();
+  const {id} = req.params;
+  try {
+    const replies = await comment.getReplies(id);
+    res.status(200).json({replies});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error: "Something bad happened!"});
+  }
+}
+
 const createComment = async(req, res) => {
   const comment = new Comment();
   const user = new User();
@@ -27,6 +39,21 @@ const createComment = async(req, res) => {
     return res.status(500).json({error: "Something bad happened!"});
   }
 }
+
+const createReply = async(req, res) => {
+  const comment = new Comment();
+  const user = new User();
+  const {date, content, reply_id} = req.body;
+  try {
+    const {login} = await user.find(req.userId);
+    const newReply = await comment.createComment({author: login, date, content, reply_id});
+    return res.status(200).json({newReply});
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({error: "Something bad happened!"});
+  }
+}
+
 
 const updateMyComment = async(req, res) => {
   const comment = new Comment();
@@ -76,4 +103,4 @@ const getAuthorAvatar = async(req, res) => {
 }
 
 
-module.exports = {getComments, createComment, deleteMyComment, updateMyComment, getAuthorAvatar};
+module.exports = {getReplies, createReply, getComments, createComment, deleteMyComment, updateMyComment, getAuthorAvatar};

@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 const db = require('../db/config.json');
 
-class Comment {
+class Reply {
   connection;
   constructor() {
-    this.table = 'comment';
+    this.table = 'reply';
   }
 
   connectToDB(query) {
@@ -26,37 +26,31 @@ class Comment {
     return resultData;
   }
 
-  async getAllComments() {
+  async getAllReplies() {
     const query = `SELECT * FROM ${this.table};`;
     const [rows] = await this.connectToDB(query);
     return rows;
   }
 
-  async getComments(id) {
+  async getReplies(id) {
     const query = `SELECT * FROM ${this.table} WHERE post_id=${id};`;
     const [rows] = await this.connectToDB(query);
     return rows;
   }
 
-  async getReplies(id) {
-    const query = `SELECT * FROM ${this.table} WHERE reply_id=${id};`;
-    const [rows] = await this.connectToDB(query);
-    return rows;
-  }
-
-  async getMyComments(login) {
+  async getMyReplies(login) {
     const query = `SELECT * FROM ${this.table} WHERE author='${login}';`;
     const [rows] = await this.connectToDB(query);
     return rows;
   }
 
-  async findComment(id) {
+  async findReply(id) {
     const query = `SELECT * FROM ${this.table} WHERE id=${id};`;
     const [rows] = await this.connectToDB(query);
     return rows;
   }
 
-  async createComment(obj) {
+  async createReply(obj) {
     const keysInsert = [];
     const valuesInsert = [];
     for(let key in obj) {
@@ -70,16 +64,14 @@ class Comment {
     return rows;
   }
 
-  
-
-  async updateComment(id, content, date) {
+  async updateReply(id, content, date) {
     const query = `UPDATE ${this.table} SET content='${content}', date='${date}' WHERE id=${id};`;
     const [rows] = await this.connectToDB(query);
     
     return;
   }
 
-  async deleteComment(id) {
+  async deleteReply(id) {
     const query = `DELETE FROM ${this.table} WHERE id=${id};`
     const [rows] = await this.connectToDB(query);
     return rows;
@@ -87,4 +79,4 @@ class Comment {
 
 }
 
-module.exports = Comment;
+module.exports = Reply;

@@ -50,9 +50,20 @@ CREATE TABLE IF NOT EXISTS comment (
     date VARCHAR(256) NOT NULL,
     content VARCHAR(500) NOT NULL,
     post_id INT,
+    reply_id INT,
     FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE,
     PRIMARY KEY(id)
 );
+
+-- CREATE TABLE IF NOT EXISTS replies (
+--     id INT NOT NULL AUTO_INCREMENT,
+--     author VARCHAR(50) NOT NULL,
+--     date VARCHAR(256) NOT NULL,
+--     content VARCHAR(500) NOT NULL,
+--     comment_id INT,
+--     FOREIGN KEY(comment_id) REFERENCES comment(id) ON DELETE CASCADE,
+--     PRIMARY KEY(id)
+-- );
 
 CREATE TABLE IF NOT EXISTS likes (
     id INT NOT NULL AUTO_INCREMENT,
@@ -66,5 +77,7 @@ CREATE TABLE IF NOT EXISTS likes (
     PRIMARY KEY(id)
 );
 
+
+
 INSERT INTO admins (login, email, password, role)
-VALUE ('admin', 'alexdziunyk@gmail.com', 'admin', 'admin');
+VALUE ('admin', 'alexadmin1@gmail.com', 'admin', 'admin');

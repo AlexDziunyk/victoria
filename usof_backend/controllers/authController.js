@@ -35,7 +35,7 @@ const register = async(req, res) => {
 
   try {
     const isExist = await user.checkLogin({login, email});
-    if(isExist.length) {
+    if(isExist.length > 0) {
       res.status(500).json({error: "User already exists"});
     } else {
       const salt = await bcrypt.genSalt(10);
@@ -52,6 +52,7 @@ const register = async(req, res) => {
     }
   } catch (error) {
     console.log(error);
+    res.status(500).json({error: "User already exists"});
   }
 }
 

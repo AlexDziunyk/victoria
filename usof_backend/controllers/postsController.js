@@ -1,8 +1,5 @@
 const Post = require('../models/post');
 const User = require('../models/user');
-const multer = require('multer');
-const storage = multer.memoryStorage(); // Store the file in memory as a Buffer
-const upload = multer({ storage: storage });
 
 const getAllPosts = async(req, res) => {
   const post = new Post();
@@ -74,15 +71,15 @@ const getAuthorAvatar = async(req, res) => {
 const updateMyPost = async(req, res) => {
   const post = new Post();
   const {id} = req.params;
-  console.log(id)
-  const {title, categories, date, status} = req.body;
+  console.log("id", id)
+  const {title, categories, date, status, content} = req.body;
   console.log({title, categories, date, status})
   try {
+    console.log("findPost!");
     const findPost = await post.getPost(id);
-    console.log(findPost)
 
     if(findPost.length > 0) {
-      await post.updatePost(id, title, status, categories, date);
+      await post.updatePost(id, title, status, categories, date, content);
       return res.status(200).json({status: "success"});
     }
   } catch (error) {

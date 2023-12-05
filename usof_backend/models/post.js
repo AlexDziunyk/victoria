@@ -38,8 +38,8 @@ class Post {
     return rows;
   }
 
-  async updatePost(id, title, status, categories, date) {
-    const query = `UPDATE ${this.table} SET title='${title}', status='${status}', categories='${categories}', date='${date}' WHERE id=${id};`;
+  async updatePost(id, title, status, categories, date, content) {
+    const query = `UPDATE ${this.table} SET title='${title}', status='${status}', content='${content}', categories='${categories}', date='${date}' WHERE id=${id};`;
     const [rows] = await this.connectToDB(query);
     console.log(23)
     return;
@@ -54,6 +54,7 @@ class Post {
   async getPost(id) {
     const query = `SELECT * FROM ${this.table} WHERE id=${id};`;
     const [rows] = await this.connectToDB(query);
+    console.log(rows)
     return rows;
   }
 
