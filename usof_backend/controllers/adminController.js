@@ -7,7 +7,7 @@ const getAllPosts = async(req, res) => {
   const post = new Post();
   
   try {
-    const allPosts = await post.getAllPosts();
+    const allPosts = await post.getAllPosts(1000);
     return res.status(200).json({allPosts});
   } catch (error) {
     console.log(error);

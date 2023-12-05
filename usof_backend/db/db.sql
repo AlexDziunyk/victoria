@@ -4,14 +4,6 @@ GRANT ALL ON ucode_web.* TO 'alexdz';
 
 USE ucode_web;
 
-CREATE TABLE IF NOT EXISTS admins (
-    id INT NOT NULL AUTO_INCREMENT,
-    login VARCHAR(30) UNIQUE NOT NULL,
-    email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role ENUM('user', 'admin') NOT NULL,
-    PRIMARY KEY(id)
-);
 
 CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL AUTO_INCREMENT,
@@ -27,7 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS post (
     id INT NOT NULL AUTO_INCREMENT,
     author VARCHAR(30) NOT NULL,
-    title VARCHAR(50) NOT NULL,
+    title VARCHAR(256) NOT NULL,
     status ENUM('active', 'inactive') NOT NULL,
     content TEXT(256) NOT NULL,
     categories VARCHAR(50) NOT NULL,
@@ -55,15 +47,6 @@ CREATE TABLE IF NOT EXISTS comment (
     PRIMARY KEY(id)
 );
 
--- CREATE TABLE IF NOT EXISTS replies (
---     id INT NOT NULL AUTO_INCREMENT,
---     author VARCHAR(50) NOT NULL,
---     date VARCHAR(256) NOT NULL,
---     content VARCHAR(500) NOT NULL,
---     comment_id INT,
---     FOREIGN KEY(comment_id) REFERENCES comment(id) ON DELETE CASCADE,
---     PRIMARY KEY(id)
--- );
 
 CREATE TABLE IF NOT EXISTS likes (
     id INT NOT NULL AUTO_INCREMENT,
@@ -81,3 +64,5 @@ CREATE TABLE IF NOT EXISTS likes (
 
 INSERT INTO admins (login, email, password, role)
 VALUE ('admin', 'alexadmin1@gmail.com', 'admin', 'admin');
+
+

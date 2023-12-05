@@ -4,8 +4,9 @@ const User = require('../models/user');
 const getAllPosts = async(req, res) => {
   const post = new Post();
   const user = new User();
+  const {limit} = req.params;
   try {
-    const allPosts = await post.getAllPosts();
+    const allPosts = await post.getAllPosts(limit);
     const id = req.userId;
 
     const findUser =  id ? await user.find(id) : false; 

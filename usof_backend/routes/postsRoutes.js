@@ -6,7 +6,7 @@ const requireAuth = require('../middleware/requireAuth');
 const isAuth = require('../middleware/isAuth');
 const askAuthId = require('../middleware/askAuthId');
 
-router.get('/', askAuthId, getAllPosts);
+router.get('/:limit', askAuthId, getAllPosts);
 router.post('/createPost', requireAuth, createPost);
 router.get('/authorAvatar/:login', getAuthorAvatar);
 router.get('/getPost/:id', getPost);

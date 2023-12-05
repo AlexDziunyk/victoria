@@ -26,8 +26,9 @@ class Post {
     return resultData;
   }
 
-  async getAllPosts() {
-    const query = `SELECT * FROM ${this.table};`;
+  async getAllPosts(limit) {
+    console.log("limit!", limit)
+    const query = `SELECT * FROM ${this.table} LIMIT ${limit};`;
     const [rows] = await this.connectToDB(query);
     return rows;
   }
